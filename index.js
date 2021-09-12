@@ -92,13 +92,13 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(inning, number){
+function finalScore(myInning, number){
   let homeScore = 0;
   let awayScore = 0;
 
   for (let i = 0; i<number; i++){
-    homeScore += inning();
-    awayScore += inning();
+    homeScore += myInning();
+    awayScore += myInning();
   }
   //console.log({"Home": homeScore, "Away": awayScore});
   return {"Home": homeScore, "Away": awayScore};
@@ -109,9 +109,9 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(inning) {
-  let home = inning();
-  let away = inning();
+function getInningScore(myInning) {
+  let home = myInning();
+  let away = myInning();
   return {"Home": home, "Away": away};
 }
 
@@ -157,11 +157,25 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(getInningScore, inning, count) { //why receive innings at all? can just do this with the first one
-  let arrGame; //array to be returned
+function scoreboard(getIS, myInning, count) { //why receive innings at all? can just do this with the first one
+  let arrGame = []; //array to be returned
+  let home =0, away = 0;
   for (let i = 0; i < count; i++){
-    arrGame[i] = getInningScore(inning);
+    let forHome = getIS(myInning).Home
+    let forAway = getIS(myInning).Away
+
+    home += forHome; //total scores
+    away += forAway;
+
+    arrGame.push(`Inning ${i + 1}: Away ${forAway} - Home ${forHome}`);
   }
+  if (home === away){
+    arrGame.push (`This game will require extra innings: Away ${away} - Home ${home}`)
+  }
+  else {
+    arrGame.push(`Final Score: Away ${away} - Home ${home}`)
+  }
+  console.log(arrGame);
   return arrGame;
 }
 
