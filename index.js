@@ -1,3 +1,5 @@
+// console.log("working");
+
 // ⭐️ Example Challenge START ⭐️
 
 /**Example Task : processFirstItem()
@@ -29,11 +31,18 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   
   1. What is the difference between counter1 and counter2?
   
+counter1 is created by counterMaker() and counter2 is created by its own function call
+
   2. Which of the two uses a closure? How can you tell?
   
+According to SOME definitions, these are both closures (since they both access a variable from out of scope), but Counter1() is a more illustrative example of closure because the inner function accesses a block-scoped variable (count) from outside its lexical scope.
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
-*/
+counter1 is better if you're going to need a LOT of counters.
+counter2 is better if you only need one counter.
+
+     */
 
 // counter1 code
 function counterMaker() {
