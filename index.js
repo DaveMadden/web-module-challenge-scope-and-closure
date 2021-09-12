@@ -160,22 +160,19 @@ Use the scoreboard function below to do the following:
 function scoreboard(getIS, myInning, count) { //why receive innings at all? can just do this with the first one
   let arrGame = []; //array to be returned
   let home =0, away = 0;
-  for (let i = 0; i < count; i++){
-    let forHome = getIS(myInning).Home
-    let forAway = getIS(myInning).Away
-
-    home += forHome; //total scores
-    away += forAway;
-
-    arrGame.push(`Inning ${i + 1}: Away ${forAway} - Home ${forHome}`);
+  for (let i = 0; i < count; i++){ //for every inning required
+    const currInning = getIS(myInning); //hold the inning's scores
+    home += currInning.Home; //total scores kept updated
+    away += currInning.Away;
+    arrGame.push(`Inning ${i + 1}: Away ${currInning.Away} - Home ${currInning.Home}`); //print inning by inning
   }
-  if (home === away){
-    arrGame.push (`This game will require extra innings: Away ${away} - Home ${home}`)
+  //add final text to the array
+  if (home === away){ //if there's a tie
+    arrGame.push (`This game will require extra innings: Away ${away} - Home ${home}`) 
   }
-  else {
+  else { //if not a tie
     arrGame.push(`Final Score: Away ${away} - Home ${home}`)
   }
-  console.log(arrGame);
   return arrGame;
 }
 
